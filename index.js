@@ -13,5 +13,16 @@ app.get('/personagem', function (req, res){
   res.send(lista)
 })
 
+// implementando Endpoint Read Id [Get] /personagem/:id(os dois pontos id funcionam para dizer que é uma especificação direcionada )
+app.get('/personagem/:id', function (req, res){
+  // função de requisição de parâmetro de rota id
+  const id = req.params.id
+
+  // função para acessar o item da lista usando ID -1
+  const item = lista[id -1]
+  
+  // função para enviar um item como resposta
+  res.send(item)
+})
 
 app.listen(3000)
