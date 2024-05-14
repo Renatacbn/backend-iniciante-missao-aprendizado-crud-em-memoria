@@ -14,13 +14,18 @@ app.get('/personagem', function (req, res){
   res.send(lista.filter(Boolean))
 })
 
-// Implementando Endpoint Read Id [Get](obter informação) /personagem/:id(os dois pontos id funcionam para dizer que é uma especificação direcionada )
+// Implementando Endpoint Read By Id [Get](obter informação) /personagem/:id(os dois pontos id funcionam para dizer que é uma especificação direcionada )
 app.get('/personagem/:id', function (req, res){
 // função de requisição de parâmetro de rota id
 const id = req.params.id
 
 // Função para acessar o item da lista usando ID -1
 const item = lista[id -1]
+
+// Função para checar se o item obtido é existente, exibindo uma mensagem caso não esteja
+if (!item) {
+  return res.status(404).send('Item não encontrado. ')
+}
   
 // função para enviar um item como resposta
   res.send(item)
@@ -56,8 +61,14 @@ lista.push(novoItem)
 
 // Implementando Endpoint Update [PUT](atualizar informação completa) /personagem/:id
 app.put('/personagem/:id', function(req, res){
+
 // Acessando o ID dos parâmetros de rota
 const id = req.params.id
+
+// Função para checar se o item do ID - 1 está na lista, exibindo uma mensagem caso não esteja
+if (!lista[id - 1]) {
+  return res.status(404).send('Item não encontrado. ')
+}
 
 // Função para acessar o Body da requisiçao
 const body = req.body
@@ -86,6 +97,11 @@ app.delete('/personagem/:id', function (req, res){
 
 // Funçãp para acessar o parâmetro de rota
 const id = req.params.id
+
+// Função para checar se o item do ID - 1 está na lista, exibindo uma mensagem caso não esteja
+if (!lista[id - 1]) {
+  return res.status(404).send('Item não encontrado. ')
+}
 
 // remover o item da lista usando o ID -1
 delete lista[id-1]
