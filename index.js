@@ -40,18 +40,18 @@ const novoItem = body.nome
 
 // Função para checar se o 'nome' está no body, e não foi modificado
 if (!novoItem) {
-  return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+  return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
 }
 // Função para checar se o novoItem está na lista ou não, e para que não duplique 
 if (lista.includes(novoItem)) {
-  return res.send('Este item já existe na lista.')
+  return res.status(409).send('Este item já existe na lista.')
 }
 
 // Adicionar na lista
 lista.push(novoItem)
 
 // Função para exibir uma mensagem de sucesso
-  res.send('Item adicionado com sucesso: ' + novoItem)
+  res.status(201).send('Item adicionado com sucesso: ' + novoItem)
 })
 
 // Implementando Endpoint Update [PUT](atualizar informação completa) /personagem/:id
@@ -67,11 +67,11 @@ const novoItem = body.nome
 
 // Função para checar se o 'nome' está no body e não foi modificado.
 if (!novoItem) {
-  return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+  return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
 }
 // Função para checar se o novoItem está na lista ou não, e para que não duplique 
 if (lista.includes(novoItem)) {
-  return res.send('Este item já existe na lista.')
+  return res.status(409).send('Este item já existe na lista.')
 }
 
 // Função para atualizar na lista novoItem pelo ID -1
