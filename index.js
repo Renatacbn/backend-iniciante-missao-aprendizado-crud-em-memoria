@@ -35,8 +35,17 @@ app.post('/personagem', function (req, res){
 // Função para acessar o Body da requisição através do req.body
 const body = req.body
 
-//  Função para adicionar um novo item na lista acessando a propriedade 'nome' do body
+//  Função para adicionar um novo item na lista acessando a propriedade 'nome' no body
 const novoItem = body.nome
+
+// Função para checar se o 'nome' está no body, e não foi modificado
+if (!novoItem) {
+  return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+}
+// Função para checar se o novoItem está na lista ou não, e para que não duplique 
+if (lista.includes(novoItem)) {
+  return res.send('Este item já existe na lista.')
+}
 
 // Adicionar na lista
 lista.push(novoItem)
@@ -55,6 +64,15 @@ const body = req.body
 
 // Função para acessar a propriedade 'nome' do body
 const novoItem = body.nome
+
+// Função para checar se o 'nome' está no body e não foi modificado.
+if (!novoItem) {
+  return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+}
+// Função para checar se o novoItem está na lista ou não, e para que não duplique 
+if (lista.includes(novoItem)) {
+  return res.send('Este item já existe na lista.')
+}
 
 // Função para atualizar na lista novoItem pelo ID -1
 lista[id - 1] = novoItem 
