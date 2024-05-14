@@ -13,7 +13,7 @@ app.get('/personagem', function (req, res){
   res.send(lista)
 })
 
-// Implementando Endpoint Read Id [Get] /personagem/:id(os dois pontos id funcionam para dizer que é uma especificação direcionada )
+// Implementando Endpoint Read Id [Get](obter informação) /personagem/:id(os dois pontos id funcionam para dizer que é uma especificação direcionada )
 app.get('/personagem/:id', function (req, res){
   // função de requisição de parâmetro de rota id
   const id = req.params.id
@@ -28,7 +28,7 @@ app.get('/personagem/:id', function (req, res){
 // Função para sinalizar para o express que está sendo utilizado o Json no body
 app.use(express.json())
 
-// Implementando Endpoint Creat [POST] /personagem
+// Implementando Endpoint Creat [POST](criar informação) /personagem
 app.post('/personagem', function (req, res){
  
   // Função para acessar o Body da requisição através do req.body
@@ -43,6 +43,26 @@ lista.push(novoItem)
 // Função para exibir uma mensagem de sucesso
   res.send('Item adicionado com sucesso: ' + novoItem)
 })
+
+// Implementando Endpoint Update [PUT](atualizar informação completa) /personagem/:id
+app.put('/personagem/:id', function(req, res){
+  // Acessando o ID dos parâmetros de rota
+  const id = req.params.id
+
+  // Função para acessar o Body da requisiçao
+  const body = req.body
+
+  // Função para acessar a propriedade 'nome' do body
+  const novoItem = body.nome
+
+  // Função para atualizar na lista novoItem pelo ID -1
+  lista[id - 1] = novoItem 
+  
+  // Função para exibir a mensagem de sucesso
+  res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
+
+})
+
 
 
 app.listen(3000)
